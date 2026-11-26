@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>REPORTED SPEECH // CYBER-GRAMMAR TERMINAL</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Retro-Futuristic Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;1,400&family=Orbitron:wght@600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Orbitron', 'sans-serif'],
+            mono: ['"Share Tech Mono"', 'monospace'],
+            body: ['"Exo 2"', 'sans-serif'],
+          },
+          colors: {
+            void: '#080914',
+            panel: '#111428',
+            panelLight: '#181c38',
+            neonCyan: '#00f3ff',
+            neonMagenta: '#ff007f',
+            neonLime: '#39ff14',
+            neonAmber: '#ffbe0b',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* STRICT 20PX BASE FONT SIZE FOR MAXIMUM LEGIBILITY */
+    html, body {
+      font-size: 20px;
+      background-color: #080914;
+      color: #eef2ff;
+      font-family: 'Exo 2', sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Retro-Futuristic Synthwave Perspective Grid Background */
+    .cyber-grid-bg {
+      background-color: #080914;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.14) 0%, transparent 55%),
+        radial-gradient(circle at 85% 30%, rgba(255, 0, 127, 0.12) 0%, transparent 45%),
+        linear-gradient(to right, rgba(0, 243, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 243, 255, 0.06) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 44px 44px, 44px 44px;
+    }
+
+    /* Subtle CRT Scanline Overlay (non-blocking) */
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 50;
+      background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.22) 50%
+      );
+      background-size: 100% 4px;
+    }
+
+    /* Neon Glow Utilities */
+    .glow-cyan {
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.3), inset 0 0 10px rgba(0, 243, 255, 0.1);
+    }
+    .glow-magenta {
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.35), inset 0 0 10px rgba(255, 0, 127, 0.1);
+    }
+    .glow-lime {
+      box-shadow: 0 0 15px rgba(57, 255, 20, 0.3), inset 0 0 10px rgba(57, 255, 20, 0.1);
+    }
+    .glow-amber {
+      box-shadow: 0 0 15px rgba(255, 190, 11, 0.3), inset 0 0 10px rgba(255, 190, 11, 0.1);
+    }
+
+    .text-glow-cyan { text-shadow: 0 0 10px rgba(0, 243, 255, 0.65); }
+    .text-glow-magenta { text-shadow: 0 0 10px rgba(255, 0, 127, 0.65); }
+
+    /* Sentence Part Color-Coding Badges & Highlights */
+    .part-reporting {
+      color: #00f3ff;
+      background: rgba(0, 243, 255, 0.13);
+      border-bottom: 2px solid #00f3ff;
+      padding: 0.05rem 0.35rem;
+      border-radius: 0.35rem;
+      font-weight: 700;
+    }
+    .part-pronoun {
+      color: #ff4da6;
+      background: rgba(255, 0, 127, 0.16);
+      border-bottom: 2px solid #ff007f;
+      padding: 0.05rem 0.35rem;
+      border-radius: 0.35rem;
+      font-weight: 700;
+    }
+    .part-verb {
+      color: #5eff3b;
+      background: rgba(57, 255, 20, 0.14);
+      border-bottom: 2px solid #39ff14;
+      padding: 0.05rem 0.35rem;
+      border-radius: 0.35rem;
+      font-weight: 700;
+    }
+    .part-time {
+      color: #ffd147;
+      background: rgba(255, 190, 11, 0.16);
+      border-bottom: 2px solid #ffbe0b;
+      padding: 0.05rem 0.35rem;
+      border-radius: 0.35rem;
+      font-weight: 700;
+    }
+
+    /* Tab Button Active State */
+    .tab-btn {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 243, 255, 0.22), rgba(255, 0, 127, 0.22));
+      border-color: #00f3ff;
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* Pulse Animation for Mic Recording */
+    @keyframes micPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 0, 127, 0.7); }
+      50% { box-shadow: 0 0 0 16px rgba(255, 0, 127, 0); }
+    }
+    .mic-recording {
+      animation: micPulse 1.4s infinite;
+      background-color: #ff007f !important;
+      color: #ffffff !important;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #080914; }
+    ::-webkit-scrollbar-thumb { background: #262b54; border-radius: 6px; border: 2px solid #080914; }
+    ::-webkit-scrollbar-thumb:hover { background: #00f3ff; }
+  </style>
+</head>
+<body class="cyber-grid-bg min-h-screen flex flex-col selection:bg-neonMagenta selection:text-white">
+
+  <!-- Subtle Retro Scanlines -->
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- Custom Non-Blocking Toast Notification -->
+  <div id="cyber-toast" class="fixed bottom-6 right-6 z-50 hidden max-w-md rounded-xl border-2 border-neonCyan bg-panel/95 px-5 py-4 text-white shadow-2xl glow-cyan transition-all duration-300">
+    <div class="flex items-center gap-3">
+      <span class="inline-block h-3 w-3 rounded-full bg-neonCyan animate-ping"></span>
+      <p id="cyber-toast-msg" class="font-mono text-base text-neonCyan"></p>
+    </div>
+  </div>
+
+  <!-- HEADER & HUD STATUS BAR -->
+  <header class="border-b-2 border-cyan-500/30 bg-panel/90 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <!-- Brand Logo -->
+        <div class="flex items-center gap-3">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border-2 border-neonCyan bg-void glow-cyan">
+            <svg class="h-7 w-7 text-neonCyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-xs uppercase tracking-widest text-neonMagenta">SYS.VER // 2086.4</span>
+              <span class="inline-block h-2 w-2 rounded-full bg-neonLime"></span>
+            </div>
+            <h1 class="font-display text-xl sm:text-2xl font-extrabold tracking-wider text-white text-glow-cyan">
+              REPORTED SPEECH <span class="text-neonCyan">NEXUS</span>
+            </h1>
+          </div>
+        </div>
+
+        <!-- Sound Toggle & XP HUD -->
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="flex items-center gap-2 rounded-xl border border-neonAmber/50 bg-void/80 px-4 py-2">
+            <span class="font-mono text-sm text-neonAmber">SYNC XP:</span>
+            <span id="hud-xp" class="font-display font-bold text-neonAmber">0 PTS</span>
+          </div>
+          <button id="sound-toggle-btn" onclick="toggleAudio()" class="flex items-center gap-2 rounded-xl border border-cyan-500/40 bg-panelLight px-4 py-2 font-mono text-sm text-neonCyan hover:border-neonCyan transition cursor-pointer" title="Toggle Retro Synth Feedback">
+            <span id="sound-icon">🔊</span>
+            <span id="sound-label">SFX: ON</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3 MAIN NAVIGATION TABS -->
+      <nav aria-label="Main Learning Modules" class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <button id="tab-btn-grammar" onclick="switchTab('grammar')" class="tab-btn active flex items-center justify-center gap-2.5 rounded-xl border-2 border-cyan-500/30 bg-void/70 px-4 py-3 font-display text-base sm:text-lg font-bold tracking-wide text-slate-300 hover:border-neonCyan cursor-pointer">
+          <svg class="h-6 w-6 text-neonCyan shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          <span>1. GRAMMAR MATRIX</span>
+        </button>
+
+        <button id="tab-btn-practice" onclick="switchTab('practice')" class="tab-btn flex items-center justify-center gap-2.5 rounded-xl border-2 border-cyan-500/30 bg-void/70 px-4 py-3 font-display text-base sm:text-lg font-bold tracking-wide text-slate-300 hover:border-neonMagenta cursor-pointer">
+          <svg class="h-6 w-6 text-neonMagenta shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>2. GRAMMAR SIMULATION</span>
+        </button>
+
+        <button id="tab-btn-speaking" onclick="switchTab('speaking')" class="tab-btn flex items-center justify-center gap-2.5 rounded-xl border-2 border-cyan-500/30 bg-void/70 px-4 py-3 font-display text-base sm:text-lg font-bold tracking-wide text-slate-300 hover:border-neonLime cursor-pointer">
+          <svg class="h-6 w-6 text-neonLime shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+          </svg>
+          <span>3. SPEAKING TERMINAL</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PERSISTENT COLOR DECODER LEGEND -->
+  <section aria-label="Sentence Color Decoder Legend" class="max-w-7xl w-full mx-auto px-4 sm:px-6 pt-6">
+    <div class="rounded-2xl border-2 border-indigo-500/40 bg-panel/90 p-4 sm:p-5 shadow-xl">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3">
+        <h2 class="font-display text-base sm:text-lg font-bold tracking-wider text-white flex items-center gap-2">
+          <span class="text-neonCyan">◈</span> SENTENCE COLOR DECODER LEGEND
+        </h2>
+        <span class="font-mono text-sm text-slate-300">Every transformation follows these 4 color signals:</span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="rounded-xl border border-neonCyan/40 bg-void/80 p-3 flex items-center gap-3">
+          <span class="h-5 w-5 rounded-md bg-neonCyan shrink-0 glow-cyan"></span>
+          <div>
+            <div class="font-bold text-neonCyan text-base">Reporting Clause</div>
+            <div class="text-sm text-slate-300">e.g., <em>She said (that)</em></div>
+          </div>
+        </div>
+        <div class="rounded-xl border border-neonMagenta/40 bg-void/80 p-3 flex items-center gap-3">
+          <span class="h-5 w-5 rounded-md bg-neonMagenta shrink-0 glow-magenta"></span>
+          <div>
+            <div class="font-bold text-pink-400 text-base">Pronouns & Possessives</div>
+            <div class="text-sm text-slate-300">e.g., <em>I → he, my → his</em></div>
+          </div>
+        </div>
+        <div class="rounded-xl border border-neonLime/40 bg-void/80 p-3 flex items-center gap-3">
+          <span class="h-5 w-5 rounded-md bg-neonLime shrink-0 glow-lime"></span>
+          <div>
+            <div class="font-bold text-lime-400 text-base">Verb Tense Backshift</div>
+            <div class="text-sm text-slate-300">e.g., <em>am → was, will → would</em></div>
+          </div>
+        </div>
+        <div class="rounded-xl border border-neonAmber/40 bg-void/80 p-3 flex items-center gap-3">
+          <span class="h-5 w-5 rounded-md bg-neonAmber shrink-0 glow-amber"></span>
+          <div>
+            <div class="font-bold text-amber-300 text-base">Time & Place Shifts</div>
+            <div class="text-sm text-slate-300">e.g., <em>today → that day</em></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 flex-grow">
+
+    <!-- ========================================================= -->
+    <!-- TAB 1: GRAMMAR MATRIX (EXPLANATION & COLOR-CODED RULES)   -->
+    <!-- ========================================================= -->
+    <section id="view-grammar" class="space-y-8">
+      
+      <!-- Intro Hero Card -->
+      <div class="rounded-2xl border-2 border-neonCyan/50 bg-panel p-6 sm:p-8 glow-cyan">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div class="space-y-3 max-w-3xl">
+            <span class="inline-block rounded-lg bg-neonCyan/15 border border-neonCyan/40 px-3 py-1 font-mono text-sm text-neonCyan">
+              MODULE 01 // CORE TRANSMISSION
+            </span>
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-white">
+              What is <span class="text-neonCyan">Reported Speech</span>?
+            </h2>
+            <p class="text-slate-200 leading-relaxed">
+              We use <strong>Reported Speech</strong> (also called <em>Indirect Speech</em>) to communicate what someone else said without using their exact words or quotation marks. Because we are reporting past words at a later moment, we usually shift <strong>pronouns</strong>, <strong>verb tenses</strong> (one step back into the past), and <strong>time/place words</strong>.
+            </p>
+          </div>
+          <div class="rounded-xl border border-cyan-500/40 bg-void p-5 shrink-0 lg:w-96">
+            <div class="font-mono text-sm text-neonCyan mb-2">GOLDEN RULE:</div>
+            <p class="text-base text-slate-200">
+              <strong>Direct:</strong> Exact words inside <code class="text-neonAmber">"..."</code><br/>
+              <strong>Reported:</strong> No quotes + <span class="part-reporting">Reporting Verb</span> + <span class="part-verb">Backshifted Tense</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Side-by-Side Comparison Example -->
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div class="rounded-xl border-2 border-slate-600/60 bg-void/90 p-5">
+            <div class="font-mono text-sm uppercase tracking-wider text-slate-400 mb-2">1. DIRECT SPEECH (Original Quote)</div>
+            <p class="text-xl leading-relaxed">
+              <span class="part-reporting">Captain Alex said,</span> “<span class="part-pronoun">I</span> <span class="part-verb">am testing</span> <span class="part-pronoun">my</span> laser shield <span class="part-time">here today</span>.”
+            </p>
+          </div>
+          <div class="rounded-xl border-2 border-neonCyan bg-void/90 p-5 glow-cyan">
+            <div class="font-mono text-sm uppercase tracking-wider text-neonCyan mb-2">2. REPORTED SPEECH (Transformed)</div>
+            <p class="text-xl leading-relaxed">
+              <span class="part-reporting">Captain Alex said (that)</span> <span class="part-pronoun">he</span> <span class="part-verb">was testing</span> <span class="part-pronoun">his</span> laser shield <span class="part-time">there that day</span>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SAY vs TELL Quick Rule -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="rounded-2xl border-2 border-neonCyan/40 bg-panel p-6">
+          <h3 class="font-display text-xl font-bold text-neonCyan mb-2">SAID (No Personal Object)</h3>
+          <p class="text-slate-300 mb-3">Use <strong>said</strong> when you do <em>not</em> mention who the listener was.</p>
+          <div class="rounded-xl bg-void p-4 border border-cyan-500/30">
+            <span class="part-reporting">Maya said (that)</span> <span class="part-pronoun">she</span> <span class="part-verb">liked</span> synthwave music.
+          </div>
+        </div>
+        <div class="rounded-2xl border-2 border-neonMagenta/40 bg-panel p-6">
+          <h3 class="font-display text-xl font-bold text-pink-400 mb-2">TOLD + OBJECT (Listener Required)</h3>
+          <p class="text-slate-300 mb-3">Use <strong>told + person/pronoun</strong> when you specify who received the message.</p>
+          <div class="rounded-xl bg-void p-4 border border-pink-500/30">
+            <span class="part-reporting">Maya told <span class="underline">me</span> (that)</span> <span class="part-pronoun">she</span> <span class="part-verb">liked</span> synthwave music.
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE TENSE BACKSHIFT MATRIX -->
+      <div class="rounded-2xl border-2 border-neonLime/40 bg-panel p-6 sm:p-8">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <span class="font-mono text-sm text-neonLime">MODULE 02 // CHRONO-SHIFT ENGINE</span>
+            <h3 class="font-display text-2xl font-bold text-white">Verb Tense Backshift Table</h3>
+          </div>
+          <span class="rounded-xl bg-neonLime/15 border border-neonLime/40 px-4 py-2 font-mono text-sm text-neonLime">
+            Click any row to hear audio!
+          </span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b-2 border-lime-500/40 font-display text-base text-neonLime">
+                <th class="py-3 px-4">Tense Shift</th>
+                <th class="py-3 px-4">Direct Speech</th>
+                <th class="py-3 px-4">Reported Speech</th>
+              </tr>
+            </thead>
+            <tbody id="tense-table-body" class="divide-y divide-slate-700/70">
+              <!-- Populated dynamically via JS for crisp audio & formatting -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TIME & PLACE EXPRESSIONS DECODER -->
+      <div class="rounded-2xl border-2 border-neonAmber/40 bg-panel p-6 sm:p-8">
+        <span class="font-mono text-sm text-neonAmber">MODULE 03 // SPACE-TIME COORDINATES</span>
+        <h3 class="font-display text-2xl font-bold text-white mb-2">Time & Place Shift Decoder</h3>
+        <p class="text-slate-300 mb-6">When the time or location changes between the original speech and the report, these words transform:</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="rounded-xl border border-amber-500/30 bg-void p-4 flex items-center justify-between">
+            <span class="text-slate-300">now</span>
+            <span class="text-neonAmber font-mono">➔</span>
+            <span class="part-time">then / at that moment</span>
+          </div>
+          <div class="rounded-xl border border-amber-500/30 bg-void p-4 flex items-center justify-between">
+            <span class="text-slate-300">today</span>
+            <span class="text-neonAmber font-mono">➔</span>
+            <span class="part-time">that day</span>
+          </div>
+          <div class="rounded-xl border border-amber-500/30 bg-void p-4 flex items-center justify-between">
+            <span class="text-slate-300">tonight</span>
+            <span class="text-neonAmber font-mono">➔</span>
+            <span class="part-time">that night</span>
+          </div>
+          <div class="rounded-xl border border-amber-500/30 bg-void p-4 flex items-center justify-between">
+            <span class="text-slate-300">tomorrow</span>
+            <span class="text-neonAmber font-mono">➔</span>
+            <span class="part-time">the next / following day</span>
+          </div>
+          <div class="rounded-xl border border-amber-500/30 bg-void p-4 flex items-center justify-between">
+            <span class="text-slate-300">yesterday</span>
+            <span class="text-neonAmber font-mono">➔</span>
+            <span class="part-time">the day before</span>
+          </div>
+          <div class="rounded-xl border border-amber-500/30 bg-void p-4 flex items-center justify-between">
+            <span class="text-slate-300">next week</span>
+            <span class="text-neonAmber font-mono">➔</span>
+            <span class="part-time">the following week</span>
+          </div>
+          <div class="rounded-xl border border-amber-500/30 bg-void p-4 flex items-center justify-between">
+            <span class="text-slate-300">here</span>
+            <span class="text-neonAmber font-mono">➔</span>
+            <span class="part-time">there</span>
+          </div>
+          <div class="rounded-xl border border-amber-500/30 bg-void p-4 flex items-center justify-between">
+            <span class="text-slate-300">this / these</span>
+            <span class="text-neonAmber font-mono">➔</span>
+            <span class="part-time">that / those</span>
+          </div>
+          <div class="rounded-xl border border-amber-500/30 bg-void p-4 flex items-center justify-between">
+            <span class="text-slate-300">ago</span>
+            <span class="text-neonAmber font-mono">➔</span>
+            <span class="part-time">before / earlier</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- REPORTING QUESTIONS & COMMANDS -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Questions Card -->
+        <div class="rounded-2xl border-2 border-neonCyan/40 bg-panel p-6 sm:p-7 space-y-4">
+          <span class="font-mono text-sm text-neonCyan">MODULE 04 // INTERROGATIVE PROTOCOL</span>
+          <h3 class="font-display text-2xl font-bold text-white">Reporting Questions</h3>
+          <p class="text-slate-300">
+            In reported questions, <strong>do NOT use question word order</strong> (no <em>do/does/did</em> auxiliary, and no question mark <code class="text-neonMagenta">?</code>). Use affirmative <strong>Subject + Verb</strong> order!
+          </p>
+
+          <div class="space-y-4 pt-2">
+            <div class="rounded-xl border border-cyan-500/30 bg-void p-4 space-y-2">
+              <div class="font-mono text-sm text-neonCyan">A. YES / NO QUESTIONS → Use IF or WHETHER</div>
+              <p class="text-slate-300"><strong>Direct:</strong> “Do <span class="part-pronoun">you</span> <span class="part-verb">speak</span> Binary?”</p>
+              <p><strong>Reported:</strong> <span class="part-reporting">He asked me if</span> <span class="part-pronoun">I</span> <span class="part-verb">spoke</span> Binary.</p>
+            </div>
+
+            <div class="rounded-xl border border-cyan-500/30 bg-void p-4 space-y-2">
+              <div class="font-mono text-sm text-neonCyan">B. WH- QUESTIONS → Keep the WH- Word</div>
+              <p class="text-slate-300"><strong>Direct:</strong> “Where <span class="part-verb">are</span> <span class="part-pronoun">you</span> going <span class="part-time">now</span>?”</p>
+              <p><strong>Reported:</strong> <span class="part-reporting">She asked where</span> <span class="part-pronoun">I</span> <span class="part-verb">was</span> going <span class="part-time">then</span>.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Commands & Requests Card -->
+        <div class="rounded-2xl border-2 border-neonMagenta/40 bg-panel p-6 sm:p-7 space-y-4">
+          <span class="font-mono text-sm text-pink-400">MODULE 05 // IMPERATIVE DIRECTIVES</span>
+          <h3 class="font-display text-2xl font-bold text-white">Commands & Requests</h3>
+          <p class="text-slate-300">
+            We do not backshift tenses in imperatives. Instead, use <strong>told / asked + object + (not) to + infinitive</strong>.
+          </p>
+
+          <div class="space-y-4 pt-2">
+            <div class="rounded-xl border border-pink-500/30 bg-void p-4 space-y-2">
+              <div class="font-mono text-sm text-pink-400">A. POSITIVE COMMAND / REQUEST</div>
+              <p class="text-slate-300"><strong>Direct:</strong> “<span class="part-verb">Activate</span> the hyperdrive!”</p>
+              <p><strong>Reported:</strong> <span class="part-reporting">The pilot told <span class="part-pronoun">us</span></span> <span class="part-verb">to activate</span> the hyperdrive.</p>
+            </div>
+
+            <div class="rounded-xl border border-pink-500/30 bg-void p-4 space-y-2">
+              <div class="font-mono text-sm text-pink-400">B. NEGATIVE COMMAND (DON'T → NOT TO)</div>
+              <p class="text-slate-300"><strong>Direct:</strong> “Please <span class="part-verb">don't touch</span> the red button.”</p>
+              <p><strong>Reported:</strong> <span class="part-reporting">She asked <span class="part-pronoun">me</span></span> <span class="part-verb">not to touch</span> the red button.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- TAB 2: GRAMMAR SIMULATION (INTERACTIVE EXERCISES)         -->
+    <!-- ========================================================= -->
+    <section id="view-practice" class="hidden space-y-6">
+      <div class="rounded-2xl border-2 border-neonMagenta/50 bg-panel p-6 sm:p-8 glow-magenta">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-pink-500/30 pb-5">
+          <div>
+            <span class="font-mono text-sm text-pink-400">SIMULATION DECK // 12 CHALLENGES</span>
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-white">
+              Grammar Transformation Lab
+            </h2>
+            <p class="text-slate-300 mt-1">Convert Direct Speech into accurate Reported Speech. Watch the color-coded feedback!</p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <div class="rounded-xl border border-neonCyan/40 bg-void px-4 py-2 font-mono text-base">
+              SCORE: <span id="quiz-score" class="text-neonCyan font-bold">0</span> / <span id="quiz-total">12</span>
+            </div>
+            <button onclick="resetQuiz()" class="rounded-xl border-2 border-neonAmber bg-neonAmber/15 px-4 py-2 font-display text-sm font-bold text-neonAmber hover:bg-neonAmber hover:text-void transition cursor-pointer">
+              ↻ RESET SIMULATION
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Pills -->
+        <div class="flex flex-wrap gap-2 pt-5">
+          <button onclick="filterQuiz('all')" id="filter-all" class="quiz-filter-btn rounded-lg border border-neonCyan bg-neonCyan/20 px-4 py-1.5 font-mono text-sm text-white cursor-pointer">ALL MISSIONS (12)</button>
+          <button onclick="filterQuiz('mc')" id="filter-mc" class="quiz-filter-btn rounded-lg border border-slate-600 bg-void px-4 py-1.5 font-mono text-sm text-slate-300 hover:border-neonCyan cursor-pointer">MULTIPLE CHOICE (6)</button>
+          <button onclick="filterQuiz('type')" id="filter-type" class="quiz-filter-btn rounded-lg border border-slate-600 bg-void px-4 py-1.5 font-mono text-sm text-slate-300 hover:border-neonCyan cursor-pointer">TYPE TRANSFORMATION (6)</button>
+        </div>
+      </div>
+
+      <!-- Questions Container -->
+      <div id="quiz-container" class="space-y-6">
+        <!-- Populated by JavaScript -->
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- TAB 3: SPEAKING TERMINAL (VOICE RECOGNITION & ROLEPLAY)   -->
+    <!-- ========================================================= -->
+    <section id="view-speaking" class="hidden space-y-8">
+      
+      <!-- Interactive Voice Simulator Card -->
+      <div class="rounded-2xl border-2 border-neonLime/50 bg-panel p-6 sm:p-8 glow-lime">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-lime-500/30 pb-5">
+          <div>
+            <span class="font-mono text-sm text-neonLime">COMMS ARRAY // VOICE & ORAL DRILLS</span>
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-white">
+              Live Speaking Terminal
+            </h2>
+            <p class="text-slate-300 mt-1">
+              Listen to the character's transmission, speak the <strong>Reported Speech</strong> version out loud into your mic, and verify with the color-coded model!
+            </p>
+          </div>
+          <div class="flex items-center gap-2 rounded-xl border border-neonLime/40 bg-void px-4 py-2 font-mono text-sm text-neonLime shrink-0">
+            <span>PROMPT</span>
+            <span id="speaking-counter" class="font-bold">1 / 8</span>
+          </div>
+        </div>
+
+        <!-- Character Transmission Box -->
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <!-- Character Avatar -->
+          <div class="lg:col-span-4 flex flex-col items-center text-center rounded-2xl border-2 border-cyan-500/40 bg-void p-6">
+            <div id="speaker-avatar" class="text-6xl mb-3 select-none">👩‍🚀</div>
+            <h3 id="speaker-name" class="font-display text-xl font-bold text-neonCyan">Commander Nova</h3>
+            <span id="speaker-role" class="font-mono text-sm text-pink-400 mt-1">Starship Valkyrie</span>
+            <button onclick="speakDirectQuote()" class="mt-4 w-full flex items-center justify-center gap-2 rounded-xl border border-neonCyan bg-neonCyan/15 px-4 py-2.5 font-display text-sm font-bold text-neonCyan hover:bg-neonCyan hover:text-void transition cursor-pointer">
+              <span>🔊 HEAR ORIGINAL QUOTE</span>
+            </button>
+          </div>
+
+          <!-- Quote & User Speaking Controls -->
+          <div class="lg:col-span-8 space-y-5">
+            <div class="rounded-2xl border-2 border-slate-600 bg-void/90 p-5 sm:p-6">
+              <div class="font-mono text-sm text-slate-400 mb-2">INCOMING DIRECT TRANSMISSION:</div>
+              <p id="direct-quote-display" class="text-xl sm:text-2xl font-bold text-white leading-relaxed">
+                “I will launch the exploration drone tomorrow!”
+              </p>
+              <div class="mt-3 font-mono text-sm text-neonAmber">
+                Starter Hint: <span id="starter-hint" class="text-white">Commander Nova said that...</span>
+              </div>
+            </div>
+
+            <!-- Microphone + Manual Fallback Controls -->
+            <div class="rounded-2xl border border-lime-500/40 bg-void/80 p-5 space-y-4">
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <button id="mic-btn" onclick="toggleSpeechRecognition()" class="flex items-center gap-3 rounded-xl border-2 border-neonLime bg-neonLime/20 px-5 py-3 font-display text-base font-bold text-neonLime hover:bg-neonLime hover:text-void transition cursor-pointer">
+                  <span class="text-xl">🎙️</span>
+                  <span id="mic-btn-text">START SPEAKING (MIC)</span>
+                </button>
+
+                <button onclick="nextSpeakingPrompt()" class="rounded-xl border-2 border-neonCyan bg-panelLight px-5 py-3 font-display text-sm font-bold text-neonCyan hover:bg-neonCyan hover:text-void transition cursor-pointer">
+                  NEXT TRANSMISSION ➔
+                </button>
+              </div>
+
+              <!-- Live Transcript Output -->
+              <div class="space-y-2">
+                <label for="spoken-transcript" class="block font-mono text-sm text-slate-300">
+                  YOUR CAPTURED VOICE / TYPED RESPONSE:
+                </label>
+                <div class="flex flex-col sm:flex-row gap-2">
+                  <input id="spoken-transcript" type="text" placeholder="Speak into your mic or type your reported sentence here..." class="w-full rounded-xl border border-slate-600 bg-panel px-4 py-3 text-white placeholder-slate-400 focus:border-neonLime focus:outline-none" />
+                  <button onclick="evaluateSpokenResponse()" class="shrink-0 rounded-xl bg-neonCyan px-5 py-3 font-display text-sm font-bold text-void hover:brightness-110 transition cursor-pointer">
+                    CHECK SYNC
+                  </button>
+                </div>
+              </div>
+
+              <!-- Oral Evaluation Feedback -->
+              <div id="speaking-eval-box" class="hidden rounded-xl border p-4"></div>
+            </div>
+
+            <!-- Reveal Model Transmission Toggle -->
+            <div class="flex flex-wrap items-center gap-3">
+              <button onclick="toggleModelAnswer()" id="reveal-model-btn" class="rounded-xl border-2 border-neonMagenta bg-neonMagenta/15 px-5 py-2.5 font-display text-sm font-bold text-pink-300 hover:bg-neonMagenta hover:text-white transition cursor-pointer">
+                👁️ REVEAL COLOR-CODED MODEL ANSWER
+              </button>
+              <button onclick="speakModelQuote()" class="rounded-xl border border-slate-500 bg-void px-4 py-2.5 font-mono text-sm text-slate-200 hover:border-neonLime hover:text-neonLime transition cursor-pointer">
+                🔊 LISTEN TO MODEL
+              </button>
+            </div>
+
+            <div id="model-answer-box" class="hidden rounded-2xl border-2 border-neonMagenta bg-void p-5 glow-magenta space-y-2">
+              <div class="font-mono text-sm text-pink-400">OPTIMAL REPORTED TRANSMISSION:</div>
+              <p id="model-answer-html" class="text-xl leading-relaxed"></p>
+              <p id="model-answer-note" class="text-sm text-slate-300 pt-1 border-t border-slate-800"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PARTNER / SOLO ROLEPLAY SCENARIO CARDS -->
+      <div class="space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <span class="font-mono text-sm text-neonCyan">COMMUNAL SIMULATIONS // ROLEPLAY CARDS</span>
+            <h3 class="font-display text-2xl font-bold text-white">Conversation & Interview Scenarios</h3>
+          </div>
+          <span class="font-mono text-sm text-slate-300">Practice aloud solo or with a partner!</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="roleplay-cards-container">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-cyan-500/20 bg-panel/80 py-6 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-400 font-mono">
+      <div>REPORTED SPEECH NEXUS // RETRO-FUTURISTIC GRAMMAR SYSTEM</div>
+      <div class="flex items-center gap-4">
+        <span class="text-neonCyan">■ Reporting</span>
+        <span class="text-pink-400">■ Pronouns</span>
+        <span class="text-lime-400">■ Backshift</span>
+        <span class="text-amber-300">■ Time/Place</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // ==========================================
+    // 1. RETRO SYNTH AUDIO ENGINE (Web Audio API)
+    // ==========================================
+    let audioEnabled = true;
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioCtx = new AudioContext();
+      }
+    }
+
+    function playSynthTone(type = 'click') {
+      if (!audioEnabled) return;
+      try {
+        initAudio();
+        if (!audioCtx) return;
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+        if (type === 'click') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(620, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.07);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+          osc.start(now);
+          osc.stop(now + 0.08);
+        } else if (type === 'success') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now); // C5
+          osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+          osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
+          osc.start(now);
+          osc.stop(now + 0.32);
+        } else if (type === 'error') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.linearRampToValueAtTime(140, now + 0.22);
+          gain.gain.setValueAtTime(0.1, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.24);
+          osc.start(now);
+          osc.stop(now + 0.24);
+        }
+      } catch (e) {
+        // Ignore audio context restrictions if blocked
+      }
+    }
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      document.getElementById('sound-icon').textContent = audioEnabled ? '🔊' : '🔇';
+      document.getElementById('sound-label').textContent = audioEnabled ? 'SFX: ON' : 'SFX: OFF';
+      if (audioEnabled) playSynthTone('click');
+      showToast(audioEnabled ? 'Synth sound effects activated.' : 'Synth sound effects muted.');
+    }
+
+    // Toast notification helper (replaces alert)
+    let toastTimeout = null;
+    function showToast(message) {
+      const toast = document.getElementById('cyber-toast');
+      const msg = document.getElementById('cyber-toast-msg');
+      msg.textContent = message;
+      toast.classList.remove('hidden');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3400);
+    }
+
+    // ==========================================
+    // 2. XP TRACKER & TAB NAVIGATION
+    // ==========================================
+    let userXP = 0;
+    function addXP(points) {
+      userXP += points;
+      document.getElementById('hud-xp').textContent = `${userXP} PTS`;
+    }
+
+    function switchTab(tabName) {
+      playSynthTone('click');
+      const tabs = ['grammar', 'practice', 'speaking'];
+      tabs.forEach(t => {
+        const view = document.getElementById(`view-${t}`);
+        const btn = document.getElementById(`tab-btn-${t}`);
+        if (t === tabName) {
+          view.classList.remove('hidden');
+          btn.classList.add('active');
+        } else {
+          view.classList.add('hidden');
+          btn.classList.remove('active');
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==========================================
+    // 3. TAB 1 DATA: TENSE BACKSHIFT TABLE
+    // ==========================================
+    const tenseBackshifts = [
+      {
+        shift: 'Present Simple ➔ Past Simple',
+        directHtml: '“<span class="part-pronoun">I</span> <span class="part-verb">work</span> on Mars.”',
+        reportedHtml: '<span class="part-reporting">He said (that)</span> <span class="part-pronoun">he</span> <span class="part-verb">worked</span> on Mars.',
+        plainSpoken: 'He said that he worked on Mars.'
+      },
+      {
+        shift: 'Present Continuous ➔ Past Continuous',
+        directHtml: '“<span class="part-pronoun">We</span> <span class="part-verb">are scanning</span> the sector <span class="part-time">now</span>.”',
+        reportedHtml: '<span class="part-reporting">They said (that)</span> <span class="part-pronoun">they</span> <span class="part-verb">were scanning</span> the sector <span class="part-time">then</span>.',
+        plainSpoken: 'They said that they were scanning the sector then.'
+      },
+      {
+        shift: 'Past Simple ➔ Past Perfect',
+        directHtml: '“<span class="part-pronoun">I</span> <span class="part-verb">found</span> a neon crystal <span class="part-time">yesterday</span>.”',
+        reportedHtml: '<span class="part-reporting">She said (that)</span> <span class="part-pronoun">she</span> <span class="part-verb">had found</span> a neon crystal <span class="part-time">the day before</span>.',
+        plainSpoken: 'She said that she had found a neon crystal the day before.'
+      },
+      {
+        shift: 'Present Perfect ➔ Past Perfect',
+        directHtml: '“<span class="part-pronoun">I</span> <span class="part-verb">have repaired</span> <span class="part-pronoun">my</span> droid.”',
+        reportedHtml: '<span class="part-reporting">Leo told me (that)</span> <span class="part-pronoun">he</span> <span class="part-verb">had repaired</span> <span class="part-pronoun">his</span> droid.',
+        plainSpoken: 'Leo told me that he had repaired his droid.'
+      },
+      {
+        shift: 'Will (Future) ➔ Would',
+        directHtml: '“<span class="part-pronoun">I</span> <span class="part-verb">will call</span> <span class="part-pronoun">you</span> <span class="part-time">tomorrow</span>.”',
+        reportedHtml: '<span class="part-reporting">Zara promised (that)</span> <span class="part-pronoun">she</span> <span class="part-verb">would call</span> <span class="part-pronoun">me</span> <span class="part-time">the next day</span>.',
+        plainSpoken: 'Zara promised that she would call me the next day.'
+      },
+      {
+        shift: 'Can (Ability) ➔ Could',
+        directHtml: '“<span class="part-pronoun">I</span> <span class="part-verb">can decode</span> <span class="part-time">this</span> signal.”',
+        reportedHtml: '<span class="part-reporting">The AI said (that)</span> <span class="part-pronoun">it</span> <span class="part-verb">could decode</span> <span class="part-time">that</span> signal.',
+        plainSpoken: 'The AI said that it could decode that signal.'
+      },
+      {
+        shift: 'Must (Obligation) ➔ Had to',
+        directHtml: '“<span class="part-pronoun">You</span> <span class="part-verb">must wear</span> a spacesuit <span class="part-time">here</span>.”',
+        reportedHtml: '<span class="part-reporting">The officer said (that)</span> <span class="part-pronoun">I</span> <span class="part-verb">had to wear</span> a spacesuit <span class="part-time">there</span>.',
+        plainSpoken: 'The officer said that I had to wear a spacesuit there.'
+      }
+    ];
+
+    function renderTenseTable() {
+      const tbody = document.getElementById('tense-table-body');
+      tbody.innerHTML = tenseBackshifts.map((row, idx) => `
+        <tr onclick="speakText('${row.plainSpoken.replace(/'/g, "\\'")}')" class="hover:bg-lime-500/10 transition cursor-pointer group">
+          <td class="py-4 px-4 font-mono text-base text-neonLime font-bold">
+            <div class="flex items-center gap-2">
+              <span class="opacity-70 group-hover:opacity-100">🔊</span>
+              <span>${row.shift}</span>
+            </div>
+          </td>
+          <td class="py-4 px-4 text-slate-200">${row.directHtml}</td>
+          <td class="py-4 px-4 text-white">${row.reportedHtml}</td>
+        </tr>
+      `).join('');
+    }
+
+    // ==========================================
+    // 4. TAB 2 DATA: GRAMMAR SIMULATION (12 ITEMS)
+    // ==========================================
+    const quizQuestions = [
+      {
+        id: 1,
+        type: 'mc',
+        category: 'Present Simple ➔ Past Simple',
+        prompt: 'Direct: “I love retro arcade games,” Sam said.',
+        question: 'Choose the correct Reported Speech transformation:',
+        options: [
+          'Sam said that he loves retro arcade games.',
+          'Sam said that he loved retro arcade games.',
+          'Sam told that he loved retro arcade games.'
+        ],
+        correctIndex: 1,
+        colorAnswer: '<span class="part-reporting">Sam said that</span> <span class="part-pronoun">he</span> <span class="part-verb">loved</span> retro arcade games.',
+        explanation: 'Present Simple ("love") backshifts to Past Simple ("loved"), and "I" changes to "he". Note: "told" requires an object (e.g., "told me").'
+      },
+      {
+        id: 2,
+        type: 'mc',
+        category: 'Present Continuous & Time Shift',
+        prompt: 'Direct: “We are launching the satellite today,” the engineer said.',
+        question: 'Select the accurate report:',
+        options: [
+          'The engineer said that they were launching the satellite that day.',
+          'The engineer said that we are launching the satellite today.',
+          'The engineer said that they was launching the satellite that day.'
+        ],
+        correctIndex: 0,
+        colorAnswer: '<span class="part-reporting">The engineer said that</span> <span class="part-pronoun">they</span> <span class="part-verb">were launching</span> the satellite <span class="part-time">that day</span>.',
+        explanation: '"We" becomes "they", Present Continuous ("are launching") shifts to Past Continuous ("were launching"), and "today" becomes "that day".'
+      },
+      {
+        id: 3,
+        type: 'mc',
+        category: 'Modal Backshift (Will ➔ Would)',
+        prompt: 'Direct: “I will fix your hoverboard tomorrow,” Maya told me.',
+        question: 'Which sentence is grammatically accurate?',
+        options: [
+          'Maya told me that she will fix my hoverboard tomorrow.',
+          'Maya told me that she would fix my hoverboard the next day.',
+          'Maya said me that she would fix her hoverboard the next day.'
+        ],
+        correctIndex: 1,
+        colorAnswer: '<span class="part-reporting">Maya told me that</span> <span class="part-pronoun">she</span> <span class="part-verb">would fix</span> <span class="part-pronoun">my</span> hoverboard <span class="part-time">the next day</span>.',
+        explanation: '"Will" shifts to "would", "your" shifts to "my" (since Maya spoke to me), and "tomorrow" becomes "the next day".'
+      },
+      {
+        id: 4,
+        type: 'mc',
+        category: 'Reporting Yes/No Questions',
+        prompt: 'Direct: “Do you know the password?” the guard asked me.',
+        question: 'How do we report this Yes/No question?',
+        options: [
+          'The guard asked me did I know the password.',
+          'The guard asked me if I knew the password.',
+          'The guard asked me if I know the password?'
+        ],
+        correctIndex: 1,
+        colorAnswer: '<span class="part-reporting">The guard asked me if</span> <span class="part-pronoun">I</span> <span class="part-verb">knew</span> the password.',
+        explanation: 'Yes/No questions use "if" or "whether", drop the auxiliary "do", shift "know" to Past Simple "knew", and use statement word order.'
+      },
+      {
+        id: 5,
+        type: 'mc',
+        category: 'Reporting Wh- Questions',
+        prompt: 'Direct: “Where did you hide the microchip?” she asked him.',
+        question: 'Choose the correct reported question:',
+        options: [
+          'She asked him where had he hidden the microchip.',
+          'She asked him where did he hide the microchip.',
+          'She asked him where he had hidden the microchip.'
+        ],
+        correctIndex: 2,
+        colorAnswer: '<span class="part-reporting">She asked him where</span> <span class="part-pronoun">he</span> <span class="part-verb">had hidden</span> the microchip.',
+        explanation: 'Keep "where", use affirmative Subject + Verb order ("he had hidden"), and backshift Past Simple ("did hide") to Past Perfect ("had hidden").'
+      },
+      {
+        id: 6,
+        type: 'mc',
+        category: 'Reporting Imperatives / Commands',
+        prompt: 'Direct: “Don’t open the airlock!” the captain shouted at us.',
+        question: 'Select the proper command report:',
+        options: [
+          'The captain told us not to open the airlock.',
+          'The captain told us to not opened the airlock.',
+          'The captain said us don’t open the airlock.'
+        ],
+        correctIndex: 0,
+        colorAnswer: '<span class="part-reporting">The captain told <span class="part-pronoun">us</span></span> <span class="part-verb">not to open</span> the airlock.',
+        explanation: 'Negative imperatives follow the pattern: told + object + not to + base verb.'
+      },
+      {
+        id: 7,
+        type: 'type',
+        category: 'Sentence Transformation (Can ➔ Could)',
+        prompt: 'Direct: “I can speak four galactic languages,” Leo said.',
+        starter: 'Leo said that',
+        acceptedAnswers: [
+          'leo said that he could speak four galactic languages',
+          'leo said he could speak four galactic languages'
+        ],
+        colorAnswer: '<span class="part-reporting">Leo said that</span> <span class="part-pronoun">he</span> <span class="part-verb">could speak</span> four galactic languages.',
+        explanation: 'Change "I" to "he" and backshift "can speak" to "could speak".'
+      },
+      {
+        id: 8,
+        type: 'type',
+        category: 'Sentence Transformation (Past Simple ➔ Past Perfect)',
+        prompt: 'Direct: “I saw a UFO yesterday,” Nora told me.',
+        starter: 'Nora told me that',
+        acceptedAnswers: [
+          'nora told me that she had seen a ufo the day before',
+          'nora told me she had seen a ufo the day before',
+          'nora told me that she had seen a ufo the previous day',
+          'nora told me she had seen a ufo the previous day'
+        ],
+        colorAnswer: '<span class="part-reporting">Nora told me that</span> <span class="part-pronoun">she</span> <span class="part-verb">had seen</span> a UFO <span class="part-time">the day before</span>.',
+        explanation: 'Past Simple ("saw") shifts to Past Perfect ("had seen"), and "yesterday" shifts to "the day before" (or "the previous day").'
+      },
+      {
+        id: 9,
+        type: 'type',
+        category: 'Sentence Transformation (Present Perfect ➔ Past Perfect)',
+        prompt: 'Direct: “We have finished the mission,” they said.',
+        starter: 'They said that',
+        acceptedAnswers: [
+          'they said that they had finished the mission',
+          'they said they had finished the mission'
+        ],
+        colorAnswer: '<span class="part-reporting">They said that</span> <span class="part-pronoun">they</span> <span class="part-verb">had finished</span> the mission.',
+        explanation: '"We" changes to "they", and Present Perfect ("have finished") backshifts to Past Perfect ("had finished").'
+      },
+      {
+        id: 10,
+        type: 'type',
+        category: 'Sentence Transformation (Place & Tense)',
+        prompt: 'Direct: “My robot is here,” Alex said.',
+        starter: 'Alex said that',
+        acceptedAnswers: [
+          'alex said that his robot was there',
+          'alex said his robot was there',
+          'alex said that her robot was there',
+          'alex said her robot was there'
+        ],
+        colorAnswer: '<span class="part-reporting">Alex said that</span> <span class="part-pronoun">his</span> robot <span class="part-verb">was</span> <span class="part-time">there</span>.',
+        explanation: '"My" becomes "his/her", "is" shifts to "was", and "here" shifts to "there".'
+      },
+      {
+        id: 11,
+        type: 'type',
+        category: 'Sentence Transformation (Reported Question)',
+        prompt: 'Direct: “Are you ready?” she asked me.',
+        starter: 'She asked me if',
+        acceptedAnswers: [
+          'she asked me if i was ready',
+          'she asked me whether i was ready'
+        ],
+        colorAnswer: '<span class="part-reporting">She asked me if</span> <span class="part-pronoun">I</span> <span class="part-verb">was</span> ready.',
+        explanation: 'Use "if", shift "you" to "I", and backshift "are" to "was" in statement order.'
+      },
+      {
+        id: 12,
+        type: 'type',
+        category: 'Sentence Transformation (Positive Request)',
+        prompt: 'Direct: “Please help me!” Tom asked Anna.',
+        starter: 'Tom asked Anna',
+        acceptedAnswers: [
+          'tom asked anna to help him'
+        ],
+        colorAnswer: '<span class="part-reporting">Tom asked Anna</span> <span class="part-verb">to help</span> <span class="part-pronoun">him</span>.',
+        explanation: 'Requests use: asked + object + to + infinitive ("to help"), and "me" becomes "him".'
+      }
+    ];
+
+    let solvedQuestions = new Set();
+    let currentFilter = 'all';
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const filtered = quizQuestions.filter(q => currentFilter === 'all' || q.type === currentFilter);
+
+      container.innerHTML = filtered.map((q) => {
+        const isSolved = solvedQuestions.has(q.id);
+        return `
+          <article id="q-card-${q.id}" class="rounded-2xl border-2 ${isSolved ? 'border-neonLime/70' : 'border-indigo-500/40'} bg-panel p-6 transition">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <span class="font-mono text-sm text-neonCyan">CHALLENGE #${q.id.toString().padStart(2, '0')} // ${q.category}</span>
+              <span id="q-status-${q.id}" class="font-mono text-sm ${isSolved ? 'text-neonLime' : 'text-slate-400'}">
+                ${isSolved ? '✔ SYNCED (+10 XP)' : 'AWAITING INPUT'}
+              </span>
+            </div>
+
+            <div class="rounded-xl bg-void border border-slate-700 p-4 mb-4">
+              <p class="text-xl font-bold text-white">${q.prompt}</p>
+            </div>
+
+            ${q.type === 'mc' ? `
+              <p class="text-slate-300 mb-3">${q.question}</p>
+              <div class="space-y-3">
+                ${q.options.map((opt, idx) => `
+                  <button onclick="checkMC(${q.id}, ${idx})" class="w-full text-left rounded-xl border border-slate-600 bg-void/80 hover:border-neonCyan hover:bg-cyan-500/10 px-5 py-3.5 text-white transition flex items-center gap-3 cursor-pointer">
+                    <span class="font-mono text-neonCyan font-bold">[${String.fromCharCode(65 + idx)}]</span>
+                    <span>${opt}</span>
+                  </button>
+                `).join('')}
+              </div>
+            ` : `
+              <div class="space-y-3">
+                <label for="input-q-${q.id}" class="block text-slate-300">
+                  Type the complete Reported Speech sentence (starts with: <strong class="text-neonAmber">${q.starter}...</strong>):
+                </label>
+                <div class="flex flex-col sm:flex-row gap-3">
+                  <input id="input-q-${q.id}" type="text" value="${q.starter} " onkeydown="if(event.key==='Enter') checkTyped(${q.id})" class="w-full rounded-xl border border-slate-600 bg-void px-4 py-3 text-white focus:border-neonMagenta focus:outline-none" />
+                  <button onclick="checkTyped(${q.id})" class="shrink-0 rounded-xl bg-neonMagenta px-6 py-3 font-display text-sm font-bold text-white hover:brightness-110 transition cursor-pointer">
+                    VERIFY
+                  </button>
+                </div>
+              </div>
+            `}
+
+            <!-- Feedback Box -->
+            <div id="feedback-q-${q.id}" class="hidden mt-4 rounded-xl border p-4 space-y-2"></div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function filterQuiz(type) {
+      playSynthTone('click');
+      currentFilter = type;
+      ['all', 'mc', 'type'].forEach(f => {
+        const btn = document.getElementById(`filter-${f}`);
+        if (f === type) {
+          btn.className = 'quiz-filter-btn rounded-lg border border-neonCyan bg-neonCyan/20 px-4 py-1.5 font-mono text-sm text-white cursor-pointer';
+        } else {
+          btn.className = 'quiz-filter-btn rounded-lg border border-slate-600 bg-void px-4 py-1.5 font-mono text-sm text-slate-300 hover:border-neonCyan cursor-pointer';
+        }
+      });
+      renderQuiz();
+    }
+
+    function showQuestionFeedback(q, isCorrect) {
+      const fb = document.getElementById(`feedback-q-${q.id}`);
+      const card = document.getElementById(`q-card-${q.id}`);
+      const status = document.getElementById(`q-status-${q.id}`);
+
+      fb.classList.remove('hidden');
+      if (isCorrect) {
+        playSynthTone('success');
+        fb.className = 'mt-4 rounded-xl border-2 border-neonLime bg-lime-950/30 p-4 space-y-2';
+        fb.innerHTML = `
+          <div class="font-display font-bold text-neonLime">✔ TRANSMISSION ACCURATE!</div>
+          <div class="text-white text-lg">${q.colorAnswer}</div>
+          <div class="text-sm text-slate-300">${q.explanation}</div>
+        `;
+        card.classList.remove('border-indigo-500/40', 'border-neonMagenta');
+        card.classList.add('border-neonLime/70');
+        status.textContent = '✔ SYNCED (+10 XP)';
+        status.className = 'font-mono text-sm text-neonLime';
+
+        if (!solvedQuestions.has(q.id)) {
+          solvedQuestions.add(q.id);
+          addXP(10);
+          document.getElementById('quiz-score').textContent = solvedQuestions.size;
+        }
+      } else {
+        playSynthTone('error');
+        fb.className = 'mt-4 rounded-xl border-2 border-neonMagenta bg-pink-950/30 p-4 space-y-2';
+        fb.innerHTML = `
+          <div class="font-display font-bold text-pink-400">✖ SIGNAL DISTORTION — TRY AGAIN</div>
+          <div class="text-sm text-slate-200"><strong>Hint:</strong> ${q.explanation}</div>
+        `;
+      }
+    }
+
+    function checkMC(qId, optionIdx) {
+      const q = quizQuestions.find(item => item.id === qId);
+      if (!q) return;
+      showQuestionFeedback(q, optionIdx === q.correctIndex);
+    }
+
+    function normalizeText(str) {
+      return str
+        .toLowerCase()
+        .replace(/[.,!?"'’“”]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function checkTyped(qId) {
+      const q = quizQuestions.find(item => item.id === qId);
+      const input = document.getElementById(`input-q-${qId}`);
+      if (!q || !input) return;
+
+      const userClean = normalizeText(input.value);
+      const isCorrect = q.acceptedAnswers.some(ans => normalizeText(ans) === userClean);
+      showQuestionFeedback(q, isCorrect);
+    }
+
+    function resetQuiz() {
+      playSynthTone('click');
+      solvedQuestions.clear();
+      document.getElementById('quiz-score').textContent = '0';
+      renderQuiz();
+      showToast('Simulation reset. All challenges ready!');
+    }
+
+    // ==========================================
+    // 5. TAB 3 DATA: SPEAKING TERMINAL & SPEECH API
+    // ==========================================
+    const speakingPrompts = [
+      {
+        avatar: '👩‍🚀',
+        name: 'Commander Nova',
+        role: 'Starship Valkyrie',
+        directText: 'I will launch the exploration drone tomorrow!',
+        starter: 'Commander Nova said that...',
+        modelHtml: '<span class="part-reporting">Commander Nova said (that)</span> <span class="part-pronoun">she</span> <span class="part-verb">would launch</span> the exploration drone <span class="part-time">the next day</span>.',
+        modelPlain: 'Commander Nova said that she would launch the exploration drone the next day.',
+        keywords: ['she', 'would launch', 'next day', 'following day'],
+        note: 'Notice: "I" ➔ "she", "will launch" ➔ "would launch", "tomorrow" ➔ "the next day".'
+      },
+      {
+        avatar: '🤖',
+        name: 'Unit RX-78',
+        role: 'Cybernetic Navigator',
+        directText: 'I am calculating the jump coordinates right now.',
+        starter: 'Unit RX-78 said that...',
+        modelHtml: '<span class="part-reporting">Unit RX-78 said (that)</span> <span class="part-pronoun">it</span> <span class="part-verb">was calculating</span> the jump coordinates <span class="part-time">then</span>.',
+        modelPlain: 'Unit RX-78 said that it was calculating the jump coordinates then.',
+        keywords: ['was calculating', 'then', 'at that moment'],
+        note: 'Notice: Present Continuous ("am calculating") shifts to Past Continuous ("was calculating"), and "right now" becomes "then".'
+      },
+      {
+        avatar: '🧑‍🔬',
+        name: 'Dr. Orion',
+        role: 'Quantum Physicist',
+        directText: 'We discovered a new energy source here yesterday.',
+        starter: 'Dr. Orion told us that...',
+        modelHtml: '<span class="part-reporting">Dr. Orion told us (that)</span> <span class="part-pronoun">they</span> <span class="part-verb">had discovered</span> a new energy source <span class="part-time">there the day before</span>.',
+        modelPlain: 'Dr. Orion told us that they had discovered a new energy source there the day before.',
+        keywords: ['they', 'had discovered', 'there', 'day before'],
+        note: 'Notice: Past Simple ("discovered") shifts to Past Perfect ("had discovered"), "here" ➔ "there", "yesterday" ➔ "the day before".'
+      },
+      {
+        avatar: '🕵️‍♀️',
+        name: 'Agent Vesper',
+        role: 'Cyber-Intelligence',
+        directText: 'Can you decrypt this message for me?',
+        starter: 'Agent Vesper asked me if...',
+        modelHtml: '<span class="part-reporting">Agent Vesper asked me if</span> <span class="part-pronoun">I</span> <span class="part-verb">could decrypt</span> <span class="part-time">that</span> message for <span class="part-pronoun">her</span>.',
+        modelPlain: 'Agent Vesper asked me if I could decrypt that message for her.',
+        keywords: ['if', 'could decrypt', 'that', 'her'],
+        note: 'Notice: Yes/No question uses "if", "can" ➔ "could", "this" ➔ "that", and "me" ➔ "her".'
+      },
+      {
+        avatar: '👨‍✈️',
+        name: 'Admiral Vance',
+        role: 'Orbital Defense',
+        directText: 'Activate all plasma shields immediately!',
+        starter: 'Admiral Vance ordered us...',
+        modelHtml: '<span class="part-reporting">Admiral Vance ordered <span class="part-pronoun">us</span></span> <span class="part-verb">to activate</span> all plasma shields immediately.',
+        modelPlain: 'Admiral Vance ordered us to activate all plasma shields immediately.',
+        keywords: ['to activate'],
+        note: 'Notice: Commands use reporting verb + object + to-infinitive ("ordered us to activate").'
+      },
+      {
+        avatar: '👩‍🎤',
+        name: 'Kira Neon',
+        role: 'Synth-Hacker',
+        directText: 'I have never seen a firewall this strong!',
+        starter: 'Kira Neon said that...',
+        modelHtml: '<span class="part-reporting">Kira Neon said (that)</span> <span class="part-pronoun">she</span> <span class="part-verb">had never seen</span> a firewall <span class="part-time">that</span> strong.',
+        modelPlain: 'Kira Neon said that she had never seen a firewall that strong.',
+        keywords: ['she', 'had never seen'],
+        note: 'Notice: Present Perfect ("have never seen") shifts to Past Perfect ("had never seen").'
+      },
+      {
+        avatar: '🛸',
+        name: 'Ambassador Zorg',
+        role: 'Andromeda Council',
+        directText: 'Where are the human delegates staying tonight?',
+        starter: 'Ambassador Zorg asked where...',
+        modelHtml: '<span class="part-reporting">Ambassador Zorg asked where</span> the human delegates <span class="part-verb">were staying</span> <span class="part-time">that night</span>.',
+        modelPlain: 'Ambassador Zorg asked where the human delegates were staying that night.',
+        keywords: ['where', 'were staying', 'that night'],
+        note: 'Notice: Wh-question keeps "where", uses statement order ("the human delegates were staying"), and "tonight" ➔ "that night".'
+      },
+      {
+        avatar: '🧙‍♂️',
+        name: 'Chronos Keeper',
+        role: 'Time Vault Guardian',
+        directText: 'Don’t touch any artifacts in this chamber!',
+        starter: 'The Chronos Keeper warned me...',
+        modelHtml: '<span class="part-reporting">The Chronos Keeper warned <span class="part-pronoun">me</span></span> <span class="part-verb">not to touch</span> any artifacts in <span class="part-time">that</span> chamber.',
+        modelPlain: 'The Chronos Keeper warned me not to touch any artifacts in that chamber.',
+        keywords: ['not to touch', 'that'],
+        note: 'Notice: Negative command uses "not to + infinitive" ("not to touch") and "this" ➔ "that".'
+      }
+    ];
+
+    const roleplayScenarios = [
+      {
+        badge: 'SCENARIO 01 // JOB INTERVIEW',
+        title: 'Reporting an Astronaut Interview',
+        prompt: 'Imagine you just finished an interview with the Mars Space Agency. Report 3 things the interviewer asked or told you:',
+        cues: [
+          '“Why do you want to travel to Mars?” ➔ She asked me why...',
+          '“We will send you the results next week.” ➔ They told me that...',
+          '“Bring your medical certificate tomorrow.” ➔ He asked me to...'
+        ]
+      },
+      {
+        badge: 'SCENARIO 02 // BROKEN PROMISES',
+        title: 'The Unreliable Tech Vendor',
+        prompt: 'A cyber-mechanic promised to repair your hovercar, but nothing works! Complain out loud using Reported Speech:',
+        cues: [
+          '“Your hovercar is completely fixed!” ➔ You told me that...',
+          '“I replaced the battery yesterday.” ➔ You said that...',
+          '“It won’t break down again.” ➔ You promised that...'
+        ]
+      },
+      {
+        badge: 'SCENARIO 03 // ALIEN ENCOUNTER',
+        title: 'First Contact Debriefing',
+        prompt: 'You are briefing Earth Command after meeting a friendly alien visitor. Report their exact words:',
+        cues: [
+          '“We come in peace from sector 9.” ➔ They said that...',
+          '“Do humans like synthwave music?” ➔ They asked us if...',
+          '“We can share clean fusion energy.” ➔ They told us that...'
+        ]
+      },
+      {
+        badge: 'SCENARIO 04 // GOSSIP PROTOCOL',
+        title: 'Overheard in the Cyber-Café',
+        prompt: 'Tell your friend what you overheard two hackers talking about at the next table:',
+        cues: [
+          '“I am planning a trip to Neo-Tokyo.” ➔ One hacker said that...',
+          '“Have you bought the tickets yet?” ➔ The other asked if...',
+          '“Don’t tell anyone our secret code.” ➔ She told him...'
+        ]
+      }
+    ];
+
+    let currentSpeakingIdx = 0;
+    let recognition = null;
+    let isRecording = false;
+
+    function loadSpeakingPrompt(idx) {
+      const item = speakingPrompts[idx];
+      document.getElementById('speaking-counter').textContent = `${idx + 1} / ${speakingPrompts.length}`;
+      document.getElementById('speaker-avatar').textContent = item.avatar;
+      document.getElementById('speaker-name').textContent = item.name;
+      document.getElementById('speaker-role').textContent = item.role;
+      document.getElementById('direct-quote-display').textContent = `“${item.directText}”`;
+      document.getElementById('starter-hint').textContent = item.starter;
+      document.getElementById('model-answer-html').innerHTML = item.modelHtml;
+      document.getElementById('model-answer-note').textContent = item.note;
+
+      // Reset states
+      document.getElementById('spoken-transcript').value = '';
+      document.getElementById('model-answer-box').classList.add('hidden');
+      document.getElementById('speaking-eval-box').classList.add('hidden');
+      document.getElementById('reveal-model-btn').textContent = '👁️ REVEAL COLOR-CODED MODEL ANSWER';
+    }
+
+    function nextSpeakingPrompt() {
+      playSynthTone('click');
+      currentSpeakingIdx = (currentSpeakingIdx + 1) % speakingPrompts.length;
+      loadSpeakingPrompt(currentSpeakingIdx);
+    }
+
+    function toggleModelAnswer() {
+      playSynthTone('click');
+      const box = document.getElementById('model-answer-box');
+      const btn = document.getElementById('reveal-model-btn');
+      const isHidden = box.classList.contains('hidden');
+      if (isHidden) {
+        box.classList.remove('hidden');
+        btn.textContent = '🙈 HIDE MODEL ANSWER';
+      } else {
+        box.classList.add('hidden');
+        btn.textContent = '👁️ REVEAL COLOR-CODED MODEL ANSWER';
+      }
+    }
+
+    // Text-to-Speech (SpeechSynthesis)
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) {
+        showToast('Text-to-Speech is not supported in this browser.');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.95;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function speakDirectQuote() {
+      speakText(speakingPrompts[currentSpeakingIdx].directText);
+    }
+
+    function speakModelQuote() {
+      speakText(speakingPrompts[currentSpeakingIdx].modelPlain);
+    }
+
+    // Web Speech API (SpeechRecognition)
+    function setupSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) return null;
+
+      const rec = new SpeechRecognition();
+      rec.lang = 'en-US';
+      rec.interimResults = true;
+      rec.maxAlternatives = 1;
+
+      rec.onstart = () => {
+        isRecording = true;
+        const btn = document.getElementById('mic-btn');
+        btn.classList.add('mic-recording');
+        document.getElementById('mic-btn-text').textContent = 'LISTENING... SPEAK NOW';
+      };
+
+      rec.onresult = (event) => {
+        let transcript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        document.getElementById('spoken-transcript').value = transcript;
+      };
+
+      rec.onerror = (event) => {
+        stopRecordingUI();
+        showToast(`Mic notice: ${event.error}. You can also type your answer directly!`);
+      };
+
+      rec.onend = () => {
+        stopRecordingUI();
+        const val = document.getElementById('spoken-transcript').value.trim();
+        if (val.length > 3) {
+          evaluateSpokenResponse();
+        }
+      };
+
+      return rec;
+    }
+
+    function stopRecordingUI() {
+      isRecording = false;
+      const btn = document.getElementById('mic-btn');
+      btn.classList.remove('mic-recording');
+      document.getElementById('mic-btn-text').textContent = 'START SPEAKING (MIC)';
+    }
+
+    function toggleSpeechRecognition() {
+      if (!recognition) {
+        recognition = setupSpeechRecognition();
+      }
+      if (!recognition) {
+        showToast('Voice recognition unavailable in this browser. Type your sentence in the box below!');
+        document.getElementById('spoken-transcript').focus();
+        return;
+      }
+
+      if (isRecording) {
+        recognition.stop();
+      } else {
+        try {
+          recognition.start();
+        } catch (e) {
+          showToast('Microphone busy. Please try again or type your response.');
+        }
+      }
+    }
+
+    function evaluateSpokenResponse() {
+      const item = speakingPrompts[currentSpeakingIdx];
+      const userText = normalizeText(document.getElementById('spoken-transcript').value);
+      const evalBox = document.getElementById('speaking-eval-box');
+
+      if (!userText) {
+        showToast('Please speak into the microphone or type your reported sentence first.');
+        return;
+      }
+
+      // Check how many key transformation markers appear in the user's speech
+      let hits = 0;
+      item.keywords.forEach(kw => {
+        if (userText.includes(kw)) hits++;
+      });
+
+      const ratio = hits / item.keywords.length;
+      evalBox.classList.remove('hidden');
+
+      if (ratio >= 0.75) {
+        playSynthTone('success');
+        addXP(15);
+        evalBox.className = 'rounded-xl border-2 border-neonLime bg-lime-950/30 p-4 space-y-1';
+        evalBox.innerHTML = `
+          <div class="font-display font-bold text-neonLime">✔ EXCELLENT ORAL TRANSMISSION! (+15 XP)</div>
+          <p class="text-slate-200 text-base">Your reported shifts matched the target grammar structures. Compare with the color-coded model below!</p>
+        `;
+        document.getElementById('model-answer-box').classList.remove('hidden');
+        document.getElementById('reveal-model-btn').textContent = '🙈 HIDE MODEL ANSWER';
+      } else {
+        playSynthTone('error');
+        evalBox.className = 'rounded-xl border-2 border-neonAmber bg-amber-950/30 p-4 space-y-1';
+        evalBox.innerHTML = `
+          <div class="font-display font-bold text-neonAmber">⚡ PARTIAL SYNC — CHECK YOUR SHIFTS</div>
+          <p class="text-slate-200 text-base">Make sure you backshifted the verb tense, pronouns, and time/place words. Click <strong>Reveal Color-Coded Model Answer</strong> to compare!</p>
+        `;
+      }
+    }
+
+    function renderRoleplayCards() {
+      const container = document.getElementById('roleplay-cards-container');
+      container.innerHTML = roleplayScenarios.map(card => `
+        <div class="rounded-2xl border-2 border-cyan-500/35 bg-panel p-6 space-y-4 hover:border-neonCyan transition">
+          <span class="inline-block rounded-lg bg-neonCyan/15 px-3 py-1 font-mono text-sm text-neonCyan">${card.badge}</span>
+          <h4 class="font-display text-xl font-bold text-white">${card.title}</h4>
+          <p class="text-slate-300 text-base">${card.prompt}</p>
+          <ul class="space-y-2.5 pt-2 border-t border-slate-700/70">
+            ${card.cues.map(cue => `
+              <li class="rounded-xl bg-void p-3 text-base text-slate-200 border border-slate-800">
+                ${cue}
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      `).join('');
+    }
+
+    // ==========================================
+    // 6. INITIALIZATION ON WINDOW LOAD
+    // ==========================================
+    window.onload = function () {
+      renderTenseTable();
+      renderQuiz();
+      loadSpeakingPrompt(0);
+      renderRoleplayCards();
+    };
+  </script>
+</body>
+</html>
